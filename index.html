@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para mi amor verdadero 💗</title>
+  <meta name="theme-color" content="#ff6b9a" />
+  <style>
+    :root{
+      --bg:#0f0f16;
+      --fg:#f7f7fb;
+      --muted:#cfd2ff;
+      --pink:#ff6b9a;
+      --violet:#8a7dff;
+      --glass:rgba(255,255,255,.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, sans-serif;
+      color:var(--fg); background: var(--bg);
+      line-height:1.6; overflow-x:hidden;
+    }
+    .hearts{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+    .heart{ position:absolute; width:18px; height:18px; transform:rotate(-45deg);
+      background: linear-gradient(135deg, var(--pink), var(--violet));
+      animation: floatUp linear infinite; opacity:.65;}
+    .heart:before,.heart:after{content:""; position:absolute; width:100%; height:100%; background:inherit; border-radius:50%}
+    .heart:before{top:-50%}
+    .heart:after{left:50%}
+    @keyframes floatUp{ to{ transform:translateY(-110vh) rotate(-45deg);} }
+    .wrap{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:24px 18px 80px; }
+    .hero{ display:grid; grid-template-columns: 1.1fr .9fr; gap:26px; align-items:center; margin-top:30px; }
+    .card{ background:rgba(20,20,36,0.9); border-radius:var(--radius); box-shadow:var(--shadow);
+           padding:22px; }
+    .title{ font-size: clamp(28px, 5vw, 56px); margin:0 0 10px; }
+    .subtitle{ color:var(--muted); margin:0 0 18px; }
+    .ctaRow{ display:flex; gap:12px; flex-wrap:wrap }
+    .btn{ border:none; padding:14px 18px; border-radius:14px; cursor:pointer; font-weight:700;
+          background:linear-gradient(90deg, var(--pink), var(--violet)); color:white; }
+    .btn.ghost{ background:transparent; color:var(--fg); border:1px dashed rgba(255,255,255,.25)}
+
+    /* Galería */
+    #galeria{margin-top:50px}
+    .central-img{max-width:600px; margin:auto; border-radius:12px; display:block;}
+    .central-caption{text-align:center; margin:12px 0; color:var(--muted)}
+    .carousel{display:flex; overflow-x:auto; gap:10px; padding:10px 0; scroll-snap-type:x mandatory;}
+    .carousel img{flex:0 0 auto; width:250px; height:250px; object-fit:cover; border-radius:12px; scroll-snap-align:center;}
+    .video-container{margin-top:20px; text-align:center}
+    .video-container video{width:100%; max-width:800px; height:450px; border-radius:12px}
+
+    /* Línea de tiempo central */
+    .timeline{position:relative; margin:50px 0;}
+    .timeline::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:4px; background:var(--violet);}
+    .tItem{position:relative; width:50%; padding:20px;}
+    .tItem .tCard{background:rgba(255,255,255,0.08); padding:12px; border-radius:12px}
+    .tItem.left{left:0; text-align:right}
+    .tItem.right{left:50%}
+    .tDate{color:var(--pink); font-weight:bold; margin-bottom:6px}
+    .tItem.left::after, .tItem.right::after{
+      content:""; position:absolute; top:24px; width:16px; height:16px; border-radius:50%; background:var(--pink);}
+    .tItem.left::after{right:-8px}
+    .tItem.right::after{left:-8px}
+
+    dialog{ border:none; border-radius:18px; background:rgba(20,20,36,0.95);
+            color:var(--fg); width:min(560px, 92vw); padding:20px; }
+    dialog::backdrop{ background:rgba(0,0,0,.7) }
+
+    footer{ margin-top:28px; text-align:center; color:var(--muted) }
+    @media(max-width:880px){.hero{grid-template-columns:1fr;} .tItem{width:100%; left:0!important; text-align:left!important;} .timeline::before{left:10px;}}
+  
+/* Momentos Especiales */
+.momentos{
+  margin-top:60px; 
+}
+.momentos .section-title{
+  font-size:1.8em;
+  text-align:center;
+  margin-bottom:30px;
+  color:var(--pink);
+}
+.momento{
+  background:rgba(255,255,255,0.05);
+  border-radius:var(--radius);
+  padding:20px;
+  margin:20px 0;
+  box-shadow: var(--shadow);
+}
+.momento h3{
+  margin-bottom:15px;
+  color:var(--violet);
+}
+.collage{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+}
+.collage img{
+  width:100%; height:auto;
+  border-radius:var(--radius);
+  object-fit:cover;
+}
+.collage.single{
+  grid-template-columns:1fr;
+}
+
+
+.music-btn{
+  position:fixed; bottom:20px; right:20px;
+  background:var(--pink); border:none;
+  border-radius:50%; width:50px; height:50px;
+  font-size:22px; cursor:pointer;
+  box-shadow:var(--shadow);
+  z-index:1000;
+}
+
+.foto-grande {
+  width: 200px;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.lado-a-lado {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.foto-lateral {
+  width: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.texto-lateral {
+  max-width: 400px;
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 0.9;
+}
+</style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+  <main class="wrap">
+    <section class="hero">
+      <div class="card">
+        <h1 class="title">Nuestro Tercer Aniversario 💞</h1>
+        <p class="subtitle">Un pequeño rincón en internet para guardar nuestros momentos favoritos.</p>
+        <div class="ctaRow">
+          <button class="btn" id="openSurprise">Abrir sorpresa ✨</button>
+          <a class="btn ghost" href="#galeria">Ver galería</a>
+        </div>
+      </div>
+      <div class="card" style="min-height:280px">   
+        <div class="card lado-a-lado">
+          <img src="images/20250119_121831.jpg" class="foto-lateral" />
+          <div class="texto-lateral">
+            <h2>POR QUE TE AMO? 💕</h2>
+            <p>Te amo, porque contigo aprendí a luchar por lo que quiero, corriendo riesgos y derribando obstáculos por lograr cumplir mis sueños.</p>
+            <p>Te amo, porque contigo me siento libre, porque puedo ser como realmente soy, sin caretas y sin disfraces.</p>
+            <p>Te amo, porque me haces inmensamente feliz, porque hemos compartido días hermosos que sin ti jamás hubiese vivido.</p>
+            <p>Te amo, porque me has enseñado a ponerme de pie después de la derrota, a no perder la esperanza ante el fracaso y a ser más valiente ante los problemas de la vida.</p>
+            <p>Te amo, porque me enseñaste a ver lo que realmente importa en el amor, porque tienes paciencia infinita.</p>
+            <p>Por todo eso y más te amo, y te amaré más cada noche y cada día. Por siempre, hasta la eternidad.</p>
+          </div>
+        </div>
+      </div> 
+    </section>
+
+    <section id="galeria">
+      <h2>Galería 📸</h2>
+      <img src="images/IMG-20250423-WA0019.jpg" class="central-img" />
+      <p class="central-caption">Este año ha sido un recuerdo vivo de nuestra historia...</p>
+      <div class="carousel">
+        <img src="images/IMG_20240914_123433_021.webp"/>
+        <img src="images/retouch_2024100401264572.jpg"/>
+        <img src="images/20241013_173904.jpg"/>
+        <img src="images/IMG-20241110-WA0024.jpg"/>
+        <img src="images/IMG-20241204-WA0007.jpg"/>
+        <img src="images/retouch_2024120600365394.jpg"/>
+        <img src="images/IMG-20241208-WA0007.jpg"/>
+        <img src="images/IMG-20241225-WA0016.jpg"/>
+        <img src="images/20241231_230221.jpg"/>
+        <img src="images/IMG_20241231_231127_125.webp"/>
+        <img src="images/IMG_20241231_231206_038.webp"/>
+        <img src="images/IMG_20250103_190057_679.webp"/>
+        <img src="images/IMG-20241224-WA0032.jpg"/>
+        <img src="images/20250119_114624.jpg"/>
+        <img src="images/IMG-20250522-WA0030.jpg"/>
+      </div>
+      <div class="video-container">
+        <video controls>
+          <source src="videos/lv_7517745837884165429_20250820155949.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <section id="linea-tiempo">
+     <h2>Nuestra historia ⏳</h2>
+      <div class="timeline">
+        <div class="tItem left">
+          <div class="tDate">02/02/2022</div>
+          <div class="tCard">Nuestro primer mensaje.</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">28/06/2022</div>
+          <div class="tCard">El primer abrazo, la primera vez que nos vimos.</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">20/08/2022</div>
+          <div class="tCard">De una manera peculiar, nos hicimos novios.</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">24/12/2022</div>
+          <div class="tCard">Nuestra primera Navidad.</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">08/02/2023</div>
+          <div class="tCard">Nuestro Primer semestre juntos presencial</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">18/03/2023</div>
+          <div class="tCard">Celebramos tu cumpleaños.</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">18/06/2023</div>
+          <div class="tCard">Entendí que el mejor regalo de cumpaleaños, eras tú</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">20/08/2023</div>
+          <div class="tCard">Nuestro Primer Aniversario.</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">18/10/2024</div>
+          <div class="tCard">Nuestro Pirmer viaje a la playa</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">20/08/2024</div>
+          <div class="tCard">Nuestro Segundo Aniversario.</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">24/12/2024</div>
+          <div class="tCard">De las mejores navidades de mi vida</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">31/12/2024</div>
+          <div class="tCard">Año viejo, emocionado por emepezar contigo otro año</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">01/01/2025</div>
+          <div class="tCard">Fuimos al Volvan, ayudar a los niños con su fanilia, un lindo acto</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">05/02/2025</div>
+          <div class="tCard">Nuevo semestre, lleno de cambios, con amor hemos salido adelante</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">23/04/2025</div>
+          <div class="tCard">Fuimos al museo, y asombrado quede al darme cuenta que un mundo lleno de arte, eres la obra favorita de mi vida.</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">11/08/2025</div>
+          <div class="tCard">Regreso su papá, se que te hizo feliz verlo de nuevo, y eso me hace feliz a mi</div>
+        </div>
+        <div class="tItem left">
+          <div class="tDate">15/08/2025</div>
+          <div class="tCard">Segundo viaje a la playa, mucho mejor y lindo.</div>
+        </div>
+        <div class="tItem right">
+          <div class="tDate">20/08/2025</div>
+          <div class="tCard">Nuestro tercer Aniversario. Gracias mis amor por tanto, te Amo Millones.</div>
+        </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="contador">
+      <h2>Tiempo juntos y vamos por más 🎉</h2>
+      <div id="countdown" style="font-size: 1.5rem; font-weight: bold;"></div>
+    </section>
+
+<script>
+function actualizarContador() {
+  const fechaInicio = new Date("2022-08-20T00:00:00");
+  const ahora = new Date();
+  let totalSegundos = Math.floor((ahora - fechaInicio) / 1000);
+  const segundos = totalSegundos % 60;
+  totalSegundos = Math.floor(totalSegundos / 60);
+  const minutos = totalSegundos % 60;
+  totalSegundos = Math.floor(totalSegundos / 60);
+  const horas = totalSegundos % 24;
+  const diasTotales = Math.floor(totalSegundos / 24);
+  const años = Math.floor(diasTotales / 365);
+  const meses = Math.floor((diasTotales % 365) / 30);
+  const dias = (diasTotales % 365) % 30;
+  document.getElementById("countdown").innerHTML =
+    `${años} años, ${meses} meses, ${dias} días, ` +
+    `${horas}h ${minutos}m ${segundos}s`;
+}
+actualizarContador();
+setInterval(actualizarContador, 1000);
+</script>
+
+    <section>
+      <h2>Nuestra playlist 🎵</h2>
+      <iframe style="border:0; width:100%; height:352px" src="https://open.spotify.com/embed/playlist/0tu2L8GFgfS2cTBadFbcoD?si=6o8g2ctFRgqfaG5JutrRUg" allow="encrypted-media"></iframe>
+    </section>
+
+    <footer>
+      Hecho con 💗 <span id="year"></span>
+    </footer>
+  </main>
+
+  <dialog id="surprise">
+    <form method="dialog">
+      <h3>10 razones por las que te amo 💖</h3>
+      <ol>
+        <li>Tu risa contagiosa.</li>
+        <li>Cómo cuidas de quienes amas.</li>
+        <li>Tu paciencia.</li>
+        <li>Tu forma de ver el mundo.</li>
+        <li>Porque contigo todo tiene sentido.</li>
+        <li>Tus abrazos.</li>
+        <li>Tu valentía y tus sueños.</li>
+        <li>Lo bien que bailas.</li>
+        <li>Tu mirada.</li>
+        <li>Porque eres tú.</li>
+      </ol>
+      <button class="btn" value="close">Cerrar</button>
+    </form>
+  </dialog>
+
+  <script>
+    const hearts = document.getElementById('hearts');
+    for(let k=0;k<15;k++){
+      const h=document.createElement('div');h.className='heart';
+      h.style.left=Math.random()*100+'vw';h.style.bottom='-'+(10+Math.random()*30)+'vh';
+      h.style.animationDuration=(8+Math.random()*10)+'s';
+      hearts.appendChild(h);
+    }
+
+    const openSurprise = document.getElementById('openSurprise');
+    const surprise = document.getElementById('surprise');
+    openSurprise.addEventListener('click', ()=> surprise.showModal());
+
+    const bgMusic = document.createElement('audio');
+    bgMusic.src = 'audio/musica.mp3';
+    bgMusic.loop = true;
+    bgMusic.autoplay = true;
+    bgMusic.volume = 0.5;
+    document.body.appendChild(bgMusic);
+
+    const musicBtn = document.createElement('button');
+    musicBtn.className = 'music-btn';
+    musicBtn.textContent = '🔊';
+    document.body.appendChild(musicBtn);
+
+    let playing = true;
+    musicBtn.addEventListener('click', ()=>{
+      if(playing){ bgMusic.pause(); musicBtn.textContent = '🔇'; }
+      else { bgMusic.play(); musicBtn.textContent = '🔊'; }
+      playing = !playing;
+    });
+  </script>
+
+</body>
+</html>
